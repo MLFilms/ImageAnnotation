@@ -17,7 +17,8 @@ import matplotlib.animation as animation
 import os
 def crop(image,startR,startC,square):
     image = color.rgb2grey(image)
-    return image[startR:startR+square,startC:startC+square]
+    # return image[startR:startR+square,startC:startC+square]
+    return image
 
  
 #take filenames of stack
@@ -37,7 +38,7 @@ print("Reading in the video frames...")
 #frames = pims.Bioformats(args.stackname)
 
 frames = pims.ImageSequence(args.videofilenamepath+'*.bmp', process_func=lambda y: crop(y,imageShape[0]//2-cropSize//2,imageShape[1]//2-cropSize//2,cropSize))
-frames = frames[1000:1200]
+#frames = frames[1000:1200]
 
 print("Done reading in the video frames...")
 global pause
@@ -72,16 +73,16 @@ class App_Window:
         self.bBoxZoom = None
         self.dX = None
         self.dY= None
-        self.cMain = tk.Canvas(self.parent,width=1000,height=400)
+        self.cMain = tk.Canvas(self.parent,width=1000,height=00)
         self.cMain.pack()
-        self.canvasFig = Figure(figsize=(5,5),dpi=100)
+        self.canvasFig = Figure(figsize=(11,7),dpi=120)
         self.FigSubPlot=self.canvasFig.add_subplot(111)
         self.FigSubPlot.set_axis_off()
         self.imageax = self.FigSubPlot.imshow(frames[0],cmap='gray')
-        self.zoomFig = Figure(figsize=(2,2))
+        self.zoomFig = Figure(figsize=(5,5))
         self.zoomSubFig=self.zoomFig.add_subplot(111)
         self.fSlice = frames[0][40:80,40:80]
-        self.zImageax = self.zoomSubFig.imshow((self.fSlice-self.fSlice.min())/(self.fSlice.max()-self.fSlice.min()),cmap='gray')
+        self.zImageax = self.zoomSubFig.imshow((self.fSlice-self.fSlice.min())/(self.fSlice.max()-self.fSlice.min()),cmap='gray',vmin=0,vmax=1)
         self.zoomSubFig.set_axis_off()
 
         self.canvasMain =FigureCanvasTkAgg(self.canvasFig,self.frame)
@@ -113,7 +114,7 @@ class App_Window:
     def next(self):
 
         global frames
-        np.savetxt('out{}.dat'.format(frames[self.indx].frame_no),np.array(self.dList))
+        np.savetxt('output/out{}.dat'.format(frames[self.indx].frame_no),np.array(self.dList))
         self.indx=self.indx+1
         print('index: {}'.format(frames[self.indx].frame_no))
         try:
@@ -178,7 +179,7 @@ class App_Window:
 
 
     def close_windows(self):
-        np.savetxt('out.dat',np.array(self.dList),fmt='%1.0f')
+        np.savetxt('output/out.dat',np.array(self.dList),fmt='%1.0f')
         self.parent.destroy()
         sys.exit()
 
