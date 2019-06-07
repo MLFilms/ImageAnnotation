@@ -37,7 +37,7 @@ imageShape = [800,1280]
 print("Reading in the video frames...")
 #frames = pims.Bioformats(args.stackname)
 
-frames = pims.ImageSequence(args.videofilenamepath+'*.bmp', process_func=lambda y: crop(y,imageShape[0]//2-cropSize//2,imageShape[1]//2-cropSize//2,cropSize))
+frames = pims.ImageSequence(args.videofilenamepath+'*.tif', process_func=lambda y: crop(y,imageShape[0]//2-cropSize//2,imageShape[1]//2-cropSize//2,cropSize))
 #frames = frames[1000:1200]
 
 print("Done reading in the video frames...")
@@ -114,7 +114,8 @@ class App_Window:
     def next(self):
 
         global frames
-        np.savetxt('output/out{}.dat'.format(frames[self.indx].frame_no),np.array(self.dList))
+        #np.savetxt('output/{}.dat'.format(frames[self.indx].frame_no),np.array(self.dList))
+        np.savetxt('output/' + os.path.basename(frames._filepaths[self.indx]).split('.')[0] + '.dat',np.array(self.dList))
         self.indx=self.indx+1
         print('index: {}'.format(frames[self.indx].frame_no))
         try:
@@ -179,6 +180,7 @@ class App_Window:
 
 
     def close_windows(self):
+        print(self)
         np.savetxt('output/out.dat',np.array(self.dList),fmt='%1.0f')
         self.parent.destroy()
         sys.exit()
