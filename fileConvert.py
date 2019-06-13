@@ -73,6 +73,9 @@ def fileConvert(filePath, outDir=None, delim = ' ', headerLines = 0, imageTag = 
                 ymin.appendChild(doc.createTextNode(str(line[1]-5)))
                 ymax.appendChild(doc.createTextNode(str(line[1]+5)))
             elif line.size == 3:
+                temp = line[1]
+                line[1] = line[2]
+                line[2] = temp
                 xmin.appendChild(doc.createTextNode(str(line[1]-5)))
                 xmax.appendChild(doc.createTextNode(str(line[1]+5)))
                 ymin.appendChild(doc.createTextNode(str(line[2]-5)))
