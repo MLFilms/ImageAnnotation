@@ -3,7 +3,7 @@ import os
 from fileConvert import fileConvert
 
 def fileConvertBatch(targetDir,imgDims):
-    print(targetDir)
+    #print(targetDir)
     filePattern = os.path.join(targetDir, '*.txt')   
 
     for filename in glob.glob(filePattern):
