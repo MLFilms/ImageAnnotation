@@ -4,9 +4,10 @@ from fileConvert import fileConvert
 
 def fileConvertBatch(targetDir,imgDims):
     #print(targetDir)
-    filePattern = os.path.join(targetDir, '*.txt')   
+    filePatternTXT = os.path.join(targetDir, '*.txt')   
+    filePatternDAT = os.path.join(targetDir, '*.dat') 
 
-    for filename in glob.glob(filePattern):
+    for filename in (glob.glob(filePatternTXT)+glob.glob(filePatternDAT)):
         fileConvert(filename,headerLines=1,imgSize=imgDims)
 
 if __name__ == "__main__":
