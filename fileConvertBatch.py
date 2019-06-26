@@ -2,12 +2,20 @@ import glob
 import os
 from fileConvert import fileConvert
 
-def fileConvertBatch(targetDir,imgDims):
+def fileConvertBatch(targetDir,imgDims, ext='all'):
     #print(targetDir)
+    
     filePatternTXT = os.path.join(targetDir, '*.txt')   
-    filePatternDAT = os.path.join(targetDir, '*.dat') 
+    filePatternDAT = os.path.join(targetDir, '*.dat')
+    if ext == 'all':
+        files = (glob.glob(filePatternTXT)+glob.glob(filePatternDAT))
+    elif ext =='txt':
+        files = glob.glob(filePatternTXT)
 
-    for filename in (glob.glob(filePatternTXT)+glob.glob(filePatternDAT)):
+    elif ext =='dat':
+        files = glob(filePatternDAT)
+
+    for filename in files:
         fileConvert(filename,headerLines=1,imgSize=imgDims)
 
 if __name__ == "__main__":
