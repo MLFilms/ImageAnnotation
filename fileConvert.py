@@ -73,10 +73,10 @@ def fileConvert(filePath, outDir=None, delim = ' ', headerLines = 0, imageTag = 
                 ymin.appendChild(doc.createTextNode(str(line[1]-5)))
                 ymax.appendChild(doc.createTextNode(str(line[1]+5)))
             elif line.size == 3:
-                xmin.appendChild(doc.createTextNode(str(line[2]-5)))
-                xmax.appendChild(doc.createTextNode(str(line[2]+5)))
-                ymin.appendChild(doc.createTextNode(str(line[1]-5)))
-                ymax.appendChild(doc.createTextNode(str(line[1]+5)))
+                xmin.appendChild(doc.createTextNode(str(line[1]-5)))
+                xmax.appendChild(doc.createTextNode(str(line[1]+5)))
+                ymin.appendChild(doc.createTextNode(str(line[2]-5)))
+                ymax.appendChild(doc.createTextNode(str(line[2]+5)))
             elif line.size == 4:
                 xmin.appendChild(doc.createTextNode(str(line[0])))
                 xmax.appendChild(doc.createTextNode(str(line[2])))
@@ -123,16 +123,19 @@ def fileConvert(filePath, outDir=None, delim = ' ', headerLines = 0, imageTag = 
         
         # Define the Bounding box element
         if line.size == 2: # Basic x,y points
+
             xmin.appendChild(doc.createTextNode(str(line[0]-5)))
             xmax.appendChild(doc.createTextNode(str(line[0]+5)))
             ymin.appendChild(doc.createTextNode(str(line[1]-5)))
             ymax.appendChild(doc.createTextNode(str(line[1]+5)))
         elif line.size == 3:
+
             xmin.appendChild(doc.createTextNode(str(line[2]-5)))
             xmax.appendChild(doc.createTextNode(str(line[2]+5)))
             ymin.appendChild(doc.createTextNode(str(line[1]-5)))
             ymax.appendChild(doc.createTextNode(str(line[1]+5)))
         elif line.size == 4:
+
             xmin.appendChild(doc.createTextNode(str(line[0])))
             xmax.appendChild(doc.createTextNode(str(line[2])))
             ymin.appendChild(doc.createTextNode(str(line[1]-1)))
